@@ -16,23 +16,40 @@ def cls():
 def DEFINE(us):
     while True:
         for counter in range(us)-1:
-        cls()
-        print("\t\t\t ______________________________________")
-        print("\t\t\t|           FOR PROJECT {} :           |".format(counte+1))
-        print("\t\t\t|        FEEL FOLLOWING FIELD :        |")
-        input("\t\t\t| ENTER FIRST CAST:")
-        input("\t\t\t| ENTER THE VALUE OF ABORTION:")    
-        try:
-            input("\t\t\t| ENTER MARR(in persent):")
-            input("\t\t\t| ENTER INTEREST RATE(in persent):")
-            input("\t\t\t| ENTER TAX RATE(in persent):")
-        except :
             cls()
-            print("\n\n\n\t\t\tPLEASE ENTER CORRECTLY!")
-            counter -=1
-            continue
-        
-        print("\t\t\t|______________________________________|")
+            print("\t\t\t ______________________________________")
+            print("\t\t\t|           FOR PROJECT {} :           |".format(counter+1))
+            print("\t\t\t|        FEEL FOLLOWING FIELD :        |")
+            input("\t\t\t| ENTER FIRST CAST:")
+            input("\t\t\t| ENTER THE VALUE OF ABORTION:")    
+            try:
+                int(input("\t\t\t| ENTER MARR(in persent):"))
+                if _<=0 or _>=100:
+                    _=int("typeerror")
+                int(input("\t\t\t| ENTER INTEREST RATE(in persent):"))
+                if _<=0 or _>=100:
+                    _=int("typeerror")
+                int(input("\t\t\t| ENTER TAX RATE(in persent):"))
+                if _<=0 or _>=100:
+                    _=int("typeerror")
+            except :
+                cls()
+                print("\n\n\n\t\t\tPLEASE ENTER CORRECTLY!")
+                counter -=1
+                continue
+            print("\t\t\t|______________________________________|")
+            print("\t\t\t|    CHOOSE PRIOD OF INTEREST RATE:    |")
+            print("\t\t\t| 1) ANNUAL                            |")
+            print("\t\t\t| 2) SEMIANNUAL                        |")
+            print("\t\t\t| 3) TRIMESTER                         |")
+            print("\t\t\t| 4) MOUNTLY                           |")
+            input("\t\t\t|______________________________________|")
+            print("\t\t\t|       CHOOSE PRIOD OF PAYMENT:       |")
+            print("\t\t\t| 1) ANNUAL                            |")
+            print("\t\t\t| 2) SEMIANNUAL                        |")
+            print("\t\t\t| 3) TRIMESTER                         |")
+            print("\t\t\t| 4) MOUNTLY                           |")
+            input("\t\t\t|______________________________________|")
 #####################################################################################################################
 def wait():
     value=random.random()
@@ -72,6 +89,7 @@ while True:
             print("\t\t\t ______________________________________ ")
             print("\t\t\t|             CREATED BY:              |")
             print("\t\t\t|        MOHAMMAD JAVAD  ADEL          |")
+            print("\t\t\t|     STUDENT NUMBER: 9621010042       |")
             print("\t\t\t|        ELECTRONIC ENGINIEER          |")
             print("\t\t\t|        IN DATE : 2020/29/5           |")
             print("\t\t\t|                                      |")
