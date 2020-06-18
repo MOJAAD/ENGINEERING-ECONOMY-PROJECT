@@ -13,9 +13,26 @@ import sys,time,os,random
 def cls():
     os.system(['clear','cls'][os.name=='nt'])
 ################################################### DEFINE FCN ######################################################
-#def DEFINE(us):
-#    while True:
-
+def DEFINE(us):
+    while True:
+        for counter in range(us)-1:
+        cls()
+        print("\t\t\t ______________________________________")
+        print("\t\t\t|           FOR PROJECT {} :           |".format(counte+1))
+        print("\t\t\t|        FEEL FOLLOWING FIELD :        |")
+        input("\t\t\t| ENTER FIRST CAST:")
+        input("\t\t\t| ENTER THE VALUE OF ABORTION:")    
+        try:
+            input("\t\t\t| ENTER MARR(in persent):")
+            input("\t\t\t| ENTER INTEREST RATE(in persent):")
+            input("\t\t\t| ENTER TAX RATE(in persent):")
+        except :
+            cls()
+            print("\n\n\n\t\t\tPLEASE ENTER CORRECTLY!")
+            counter -=1
+            continue
+        
+        print("\t\t\t|______________________________________|")
 #####################################################################################################################
 def wait():
     value=random.random()
@@ -49,8 +66,7 @@ while True:
         print("\t\t\t| HOW MANY PROJECT DO YOU WANT TO DEFINE? |")
         print("\t\t\t|_________________________________________|")
         us=input()
-        wait()
-        #DEFINE(us)
+        DEFINE(us)
     elif selector=='2' :
             cls()
             print("\t\t\t ______________________________________ ")
