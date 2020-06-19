@@ -14,11 +14,12 @@ def cls():
     os.system(['clear','cls'][os.name=='nt'])
 ################################################### DEFINE FCN ######################################################
 def DEFINE(us):
+    us=int(us)-1
     while True:
-        for counter in range(us)-1:
+        for counter in range(us):
             cls()
             print("\t\t\t ______________________________________")
-            print("\t\t\t|           FOR PROJECT {} :           |".format(counter+1))
+            print("\t\t\t|           FOR PROJECT {} :            |".format(counter+1))
             print("\t\t\t|        FEEL FOLLOWING FIELD :        |")
             input("\t\t\t| ENTER FIRST CAST:")
             input("\t\t\t| ENTER THE VALUE OF ABORTION:")    
@@ -26,30 +27,39 @@ def DEFINE(us):
                 int(input("\t\t\t| ENTER MARR(in persent):"))
                 if _<=0 or _>=100:
                     _=int("typeerror")
-                int(input("\t\t\t| ENTER INTEREST RATE(in persent):"))
-                if _<=0 or _>=100:
-                    _=int("typeerror")
                 int(input("\t\t\t| ENTER TAX RATE(in persent):"))
                 if _<=0 or _>=100:
                     _=int("typeerror")
-            except :
+                n=int(input("\t\t\t| ENTER LIFETIME(years):"))
+                r=int(input("\t\t\t| ENTER INTEREST RATE(in persent):"))
+                if _<=0 or _>=100:
+                    _=int("typeerror")
+                print("\t\t\t|______________________________________|")
+                print("\t\t\t|    CHOOSE PRIOD OF INTEREST RATE:    |")
+                print("\t\t\t| 1) ANNUAL                            |")
+                print("\t\t\t| 2) SEMIANNUAL                        |")
+                print("\t\t\t| 4) TRIMESTER                         |")
+                print("\t\t\t| 12) MOUNTLY                          |")
+                t=input("\t\t\t|______________________________________|")
+                # print("\t\t\t|       CHOOSE PRIOD OF PAYMENT:       |")
+                # print("\t\t\t| 1) ANNUAL                            |")
+                # print("\t\t\t| 2) SEMIANNUAL                        |")
+                # print("\t\t\t| 3) TRIMESTER                         |")
+                # print("\t\t\t| 4) MOUNTLY                           |")
+                # r=input("\t\t\t|______________________________________|")
+                if int(t==1) or int(t)==2 or int(t)==4 or int(t)==12 :
+                    r=r/100
+                    i=(1+r)**t-1
+                while True:
+                    int(input("\t\t\t| CHOOSE INCMOE/CAST TYPE:(1-constant 2-in a period 3-no one 4-next)"))
+                    if _<=0 or _>=100:
+                        _=int("typeerror")
+            except TypeError:
                 cls()
                 print("\n\n\n\t\t\tPLEASE ENTER CORRECTLY!")
                 counter -=1
                 continue
-            print("\t\t\t|______________________________________|")
-            print("\t\t\t|    CHOOSE PRIOD OF INTEREST RATE:    |")
-            print("\t\t\t| 1) ANNUAL                            |")
-            print("\t\t\t| 2) SEMIANNUAL                        |")
-            print("\t\t\t| 3) TRIMESTER                         |")
-            print("\t\t\t| 4) MOUNTLY                           |")
-            input("\t\t\t|______________________________________|")
-            print("\t\t\t|       CHOOSE PRIOD OF PAYMENT:       |")
-            print("\t\t\t| 1) ANNUAL                            |")
-            print("\t\t\t| 2) SEMIANNUAL                        |")
-            print("\t\t\t| 3) TRIMESTER                         |")
-            print("\t\t\t| 4) MOUNTLY                           |")
-            input("\t\t\t|______________________________________|")
+            
 #####################################################################################################################
 def wait():
     value=random.random()
