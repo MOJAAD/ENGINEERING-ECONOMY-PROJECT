@@ -20,8 +20,6 @@ def DEFINE(us):
         counter=0
         for counter in range(us-1):
             project.append([0,0,0,0,0,0,0,0])
-    #del info
-    #while True:
     counter=0
     while counter<us:
         cls()
@@ -58,28 +56,18 @@ def DEFINE(us):
             else:
                 project[counter][4]=int('typeerror')
             project[counter][6]=int(input("\t\t\t| ENTER ANNUAL PAYMENT:"))
-            project[counter][7]=int(input("\t\t\t| ENTER FUTURE VALUE:"))
-                # while True:
-                #     input("\t\t\t| CHOOSE INCMOE/CAST TYPE:(1-constant 2-in a period 3-no one 4-next)")
-                #     if _=='1':
-                #         _=int("typeerror")
-                #     if _=='2':
-                #         _=int("typeerror")
-                #     if _=='3':
-                #         _=int("typeerror")
-                #     if _=='4':
-                #         break    
+            project[counter][7]=int(input("\t\t\t| ENTER FUTURE VALUE:"))    
             counter=counter+1
         except ValueError or TypeError:
             cls()
             print("\n\n\n\t\t\tPLEASE ENTER CORRECTLY!")
-            #counter -=1
             time.sleep(1)
             continue
     counter=0
     for counter in range(us):
-        print("project {} : {}".format(counter+1,project[counter]))
+        print("\t\t\t| project {} : {}".format(counter+1,project[counter]))
     input("\t\t\t| press any key to continue...")
+    return project
 #####################################################################################################################
 def wait():
     value=random.random()
@@ -113,7 +101,8 @@ while True:
         print("\t\t\t| HOW MANY PROJECT DO YOU WANT TO DEFINE? |")
         print("\t\t\t|_________________________________________|")
         us=input()
-        DEFINE(us)
+        project=DEFINE(us)
+        #COMPUTE(project)
     elif selector=='2' :
             cls()
             print("\t\t\t ______________________________________ ")
