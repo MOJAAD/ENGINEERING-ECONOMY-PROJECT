@@ -14,27 +14,29 @@ def cls():
     os.system(['clear','cls'][os.name=='nt'])
 ################################################### DEFINE FCN ######################################################
 def DEFINE(us):
-    info=[0,0,0,0,0,0,0,0]
-    project=[info]
-    if int(us)>1:
-        for counter in range(int(us)):
-            project.append(info)
-    us=int(us)-1
+    project=[[0,0,0,0,0,0,0,0]]
+    us=int(us)
+    if us>=1:
+        counter=0
+        for counter in range(us-1):
+            project.append([0,0,0,0,0,0,0,0])
+    #del info
     #while True:
-    for counter in range(us):
+    counter=0
+    while counter<us:
         cls()
         print("\t\t\t ______________________________________")
         print("\t\t\t|           FOR PROJECT {} :            |".format(counter+1))
         print("\t\t\t|        FEEL FOLLOWING FIELD :        |")
-        project[counter][0]=input("\t\t\t| ENTER FIRST CAST:")
-        project[counter][1]=input("\t\t\t| ENTER THE VALUE OF ABORTION:")    
         try:
+            project[counter][0]=int(input("\t\t\t| ENTER FIRST CAST:"))
+            project[counter][1]=int(input("\t\t\t| ENTER THE VALUE OF ABORTION:"))    
             project[counter][2]=int(input("\t\t\t| ENTER MARR(in persent):"))
             if project[counter][2]<=0 or project[counter][2]>=100:
                 project[counter][2]=int("typeerror")
             else :
                 project[counter][2]=project[counter][2]/100
-                project[counter][3]=int(input("\t\t\t| ENTER TAX RATE(in persent):"))
+            project[counter][3]=int(input("\t\t\t| ENTER TAX RATE(in persent):"))
             if project[counter][3]<=0 or project[counter][3]>=100:
                 project[counter][3]=int("typeerror")
             else:
@@ -67,12 +69,17 @@ def DEFINE(us):
                 #         _=int("typeerror")
                 #     if _=='4':
                 #         break    
-        except TypeError:
+            counter=counter+1
+        except ValueError or TypeError:
             cls()
             print("\n\n\n\t\t\tPLEASE ENTER CORRECTLY!")
-            counter -=1
+            #counter -=1
+            time.sleep(1)
             continue
-            
+    counter=0
+    for counter in range(us):
+        print("project {} : {}".format(counter+1,project[counter]))
+    input("\t\t\t| press any key to continue...")
 #####################################################################################################################
 def wait():
     value=random.random()
