@@ -91,12 +91,16 @@ def COMPUTE(project):
         print("\t\t\t|   3) ROR                             |")
         print("\t\t\t|   4) IGNORE!                         |")
         selector=input("\t\t\t|______________________________________|")
+        tot=[0]
+        for counter in range(len(project)-1):
+            tot.append([0])
         if selector=='1':
-
+            pass
         elif selector=='2':
-
+            for counter in range(len(project)-1):
+                pass            
         elif selector=='3':
-
+            pass
         elif selector=='4':
             break
 ############################################### (P/F,%i,n) FACTOR ###################################################            
