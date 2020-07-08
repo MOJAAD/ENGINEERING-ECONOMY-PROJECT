@@ -40,21 +40,21 @@ def DEFINE(us):
             else:
                 project[counter][3]=project[counter][3]/100
             project[counter][4]=int(input("\t\t\t| ENTER LIFETIME(years):"))
-            r=int(input("\t\t\t| ENTER INTEREST RATE(in persent):"))
-            if r<=0 or r>=100:
-                r=int("typeerror")
-            print("\t\t\t|______________________________________|")
-            print("\t\t\t|    CHOOSE PRIOD OF INTEREST RATE:    |")
-            print("\t\t\t| 1) ANNUAL                            |")
-            print("\t\t\t| 2) SEMIANNUAL                        |")
-            print("\t\t\t| 4) TRIMESTER                         |")
-            print("\t\t\t| 12) MOUNTLY                          |")
-            t=input("\t\t\t|______________________________________|")
-            if int(t)==1 or int(t)==2 or int(t)==4 or int(t)==12 :
-                r=r/100
-                project[counter][5]=((1+r)**int(t))-1
-            else:
-                project[counter][4]=int('typeerror')
+            # r=int(input("\t\t\t| ENTER INTEREST RATE(in persent):"))
+            # if r<=0 or r>=100:
+            #     r=int("typeerror")
+            # print("\t\t\t|______________________________________|")
+            # print("\t\t\t|    CHOOSE PRIOD OF INTEREST RATE:    |")
+            # print("\t\t\t| 1) ANNUAL                            |")
+            # print("\t\t\t| 2) SEMIANNUAL                        |")
+            # print("\t\t\t| 4) TRIMESTER                         |")
+            # print("\t\t\t| 12) MOUNTLY                          |")
+            # t=input("\t\t\t|______________________________________|")
+            # if int(t)==1 or int(t)==2 or int(t)==4 or int(t)==12 :
+            #     r=r/100
+            #     project[counter][5]=((1+r)**int(t))-1
+            # else:
+            #     project[counter][4]=int('typeerror')
             project[counter][6]=int(input("\t\t\t| ENTER ANNUAL PAYMENT:"))
             project[counter][7]=int(input("\t\t\t| ENTER FUTURE VALUE:"))    
             counter=counter+1
@@ -95,12 +95,14 @@ def COMPUTE(project):
         for counter in range(len(project)-1):
             tot.append([0])
         if selector=='1':
-            pass
+            cls()
+            print('\n\n\t\t\t\tnot exist!')
         elif selector=='2':
             for counter in range(len(project)-1):
                 pass            
         elif selector=='3':
-            pass
+            cls()
+            print('\n\n\t\t\t\tnot exist!')
         elif selector=='4':
             break
 ############################################### (P/F,%i,n) FACTOR ###################################################            
