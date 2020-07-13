@@ -113,12 +113,9 @@ def COMPUTE(project):
         selector=input("\t\t\t|______________________________________|")
         tot=[0]
         for counter in range(len(project)-1):
-            tot.append([0])
+            tot.append(0)
         if selector=='1':
-            cls()
-            print('\n\n\t\t\t\tnot exist yet!')
-        elif selector=='2':
-            for counter in range(len(project)-1):
+            for counter in range(len(project)):
                 D=(project[counter][0]-project[counter][1])/project[counter][4]
                 for year in range(project[counter][4]):
                     if year==0:
@@ -128,7 +125,31 @@ def COMPUTE(project):
                     elif year==project[counter][4]:
                         CFAT=AFFACTOR(5000,project[counter][2],project[counter][4])
                         tot[counter]=tot[counter]+CFAT
-                    else year==project[counter][4]-1:
+                    elif year==project[counter][4]-1:
+                        CFAT=((project[counter][7]-project[counter][6])-D)
+                        TX=project[counter][3]*CFAT
+                        if CFAT>0:
+                            CFAT=CFAT-TX
+                        tot[counter]=tot[counter]+CFAT
+            for counter in range(len(tot)):
+                tot[counter]=PAFACTOR(tot[counter],project[counter][2],project[counter][4])
+            final=max(tot)
+            wait()
+            cls()
+            print('\n\n\t\t\t| THE MOST ECONOMICAL PROJECT IS {} |'.format(tot.index(final)+1))
+            input('\t\t\t| perss any key to continue...      |')
+        elif selector=='2':
+            for counter in range(len(project)):
+                D=(project[counter][0]-project[counter][1])/project[counter][4]
+                for year in range(project[counter][4]):
+                    if year==0:
+                        tot[counter]=-project[counter][0]
+                        tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
+                        year=project[counter][4]-2
+                    elif year==project[counter][4]:
+                        CFAT=AFFACTOR(5000,project[counter][2],project[counter][4])
+                        tot[counter]=tot[counter]+CFAT
+                    elif year==project[counter][4]-1:
                         CFAT=((project[counter][7]-project[counter][6])-D)
                         TX=project[counter][3]*CFAT
                         if CFAT>0:
@@ -136,7 +157,9 @@ def COMPUTE(project):
                         tot[counter]=tot[counter]+CFAT
             final=max(tot)
             wait()
-            print('\n\n\t\t\t| THE MOST ECONOMICAL PROJECT IS {} '.format(tot.index(final)+1))            
+            cls()
+            print('\n\n\t\t\t| THE MOST ECONOMICAL PROJECT IS {} |'.format(tot.index(final)+1))
+            input('\t\t\t| perss any key to continue...      |')
         elif selector=='3':
             cls()
             print('\n\n\t\t\t\tnot exist yet!')
