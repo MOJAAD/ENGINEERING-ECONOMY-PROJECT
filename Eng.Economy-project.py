@@ -60,7 +60,7 @@ def DEFINE(us):
         print("\t\t\t|        FEEL FOLLOWING FIELD :        |")
         try:
             project[counter][0]=int(input("\t\t\t| ENTER FIRST CAST:"))
-            project[counter][1]=int(input("\t\t\t| ENTER THE VALUE OF ABORTION:"))    
+            project[counter][1]=int(input("\t\t\t| ENTER THE VALUE OF SCRAPPING:"))    
             project[counter][2]=int(input("\t\t\t| ENTER MARR(in persent):"))
             if project[counter][2]<=0 or project[counter][2]>=100:
                 project[counter][2]=int("typeerror")
@@ -88,7 +88,7 @@ def DEFINE(us):
             # else:
             #     project[counter][4]=int('typeerror')
             project[counter][6]=int(input("\t\t\t| ENTER ANNUAL PAYMENT:"))
-            project[counter][7]=int(input("\t\t\t| ENTER FUTURE VALUE:"))    
+            project[counter][7]=int(input("\t\t\t| ENTER ANNUAL INCOME:"))    
             counter=counter+1
         except ValueError or TypeError:
             cls()
@@ -100,7 +100,6 @@ def DEFINE(us):
         print("\t\t\t| project {} : {}".format(counter+1,project[counter]))
     input("\t\t\t| press any key to continue...")
     return project
-
 ################################################## COMPUTE FCN ######################################################
 def COMPUTE(project):
     while True:
@@ -117,13 +116,30 @@ def COMPUTE(project):
             tot.append([0])
         if selector=='1':
             cls()
-            print('\n\n\t\t\t\tnot exist!')
+            print('\n\n\t\t\t\tnot exist yet!')
         elif selector=='2':
             for counter in range(len(project)-1):
-                pass            
+                D=(project[counter][0]-project[counter][1])/project[counter][4]
+                for year in range(project[counter][4]):
+                    if year==0:
+                        tot[counter]=-project[counter][0]
+                        tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
+                        year=project[counter][4]-2
+                    elif year==project[counter][4]:
+                        CFAT=AFFACTOR(5000,project[counter][2],project[counter][4])
+                        tot[counter]=tot[counter]+CFAT
+                    else year==project[counter][4]-1:
+                        CFAT=((project[counter][7]-project[counter][6])-D)
+                        TX=project[counter][3]*CFAT
+                        if CFAT>0:
+                            CFAT=CFAT-TX
+                        tot[counter]=tot[counter]+CFAT
+            final=max(tot)
+            wait()
+            print('\n\n\t\t\t| THE MOST ECONOMICAL PROJECT IS {} '.format(tot.index(final)+1))            
         elif selector=='3':
             cls()
-            print('\n\n\t\t\t\tnot exist!')
+            print('\n\n\t\t\t\tnot exist yet!')
         elif selector=='4':
             break
 
