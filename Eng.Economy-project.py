@@ -4,11 +4,12 @@
 #                                             IN THE NAME OG GOD                                                    #
 #                                            PROJECT  OF  ECONOMY                                                   #
 #                                           CRAETED BY :    MOJAAD                                                  #
-#                                             IN DATE: 2020/21/6                                                    #
+#                                             IN DATE: 2020/07/14                                                   #
 #                                                                                                                   #
 #                                                                                                                   #
 #################################################### MODULES ########################################################
 import sys,time,os,random
+from sympy import symbols,solve
 ################################################# CLEAR SCREEN ######################################################
 def cls():
     os.system(['clear','cls'][os.name=='nt'])
@@ -110,7 +111,7 @@ def COMPUTE(project):
         print("\t\t\t|   2) NEU                             |")
         print("\t\t\t|   3) ROR                             |")
         print("\t\t\t|   4) IGNORE!                         |")
-        selector=input("\t\t\t|______________________________________|")
+        selector=input("\t\t\t|______________________________________|\n")
         tot=[0]
         for counter in range(len(project)-1):
             tot.append(0)
@@ -121,9 +122,9 @@ def COMPUTE(project):
                     if year==0:
                         tot[counter]=-project[counter][0]
                         tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
-                        year=project[counter][4]-2
+                        #year=project[counter][4]-2
                     elif year==project[counter][4]:
-                        CFAT=AFFACTOR(5000,project[counter][2],project[counter][4])
+                        CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
                         tot[counter]=tot[counter]+CFAT
                     elif year==project[counter][4]-1:
                         CFAT=((project[counter][7]-project[counter][6])-D)
@@ -145,9 +146,9 @@ def COMPUTE(project):
                     if year==0:
                         tot[counter]=-project[counter][0]
                         tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
-                        year=project[counter][4]-2
+                        #year=project[counter][4]-2
                     elif year==project[counter][4]:
-                        CFAT=AFFACTOR(5000,project[counter][2],project[counter][4])
+                        CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
                         tot[counter]=tot[counter]+CFAT
                     elif year==project[counter][4]-1:
                         CFAT=((project[counter][7]-project[counter][6])-D)
@@ -161,8 +162,30 @@ def COMPUTE(project):
             print('\n\n\t\t\t| THE MOST ECONOMICAL PROJECT IS {} |'.format(tot.index(final)+1))
             input('\t\t\t| perss any key to continue...      |')
         elif selector=='3':
-            cls()
-            print('\n\n\t\t\t\tnot exist yet!')
+            for counter in range(len(project)):
+                D=(project[counter][0]-project[counter][1])/project[counter][4]
+                for year in range(project[counter][4]):
+                    if year==0:
+                        tot[counter]=-project[counter][0]
+                        #tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
+                        ROR=symbols('ROR')
+                        equation=(ROR*((1+ROR)**project[counter][4]))/(((1+ROR)**project[counter][4])-1)
+                        tot[counter]=equation*tot[counter]
+                        #year=project[counter][4]-2
+                    elif year==project[counter][4]:
+                        #CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
+                        ROR=symbols('ROR')
+                        equation=(((1+ROR)**project[counter][4])-1)/ROR
+                        equation=equation*project[counter][1]
+                        tot[counter]=tot[counter]+equation
+                        project[counter][5]=solve(tot[counter])
+                    elif year==project[counter][4]-1:
+                        CFAT=((project[counter][7]-project[counter][6])-D)
+                        TX=project[counter][3]*CFAT
+                        if CFAT>0:
+                            CFAT=CFAT-TX
+                        tot[counter]=tot[counter]+CFAT
+            
         elif selector=='4':
             break
 
