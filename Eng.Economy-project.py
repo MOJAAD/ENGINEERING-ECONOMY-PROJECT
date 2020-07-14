@@ -9,7 +9,7 @@
 #                                                                                                                   #
 #################################################### MODULES ########################################################
 import sys,time,os,random
-from sympy import symbols,solve
+#from sympy import symbols,solve
 ################################################# CLEAR SCREEN ######################################################
 def cls():
     os.system(['clear','cls'][os.name=='nt'])
@@ -162,7 +162,7 @@ def COMPUTE(project):
                 print("\t\t\t|   {}) NPW = {}".format(counter+1,tot[counter]))
             final=max(tot)
             print("\t\t\t|______________________________________|")
-            print('\t\t\t|  THE MOST ECONOMICAL PROJECT IS: {}  |'.format(tot.index(final)+1))
+            print('\t\t\t|  THE MOST ECONOMICAL PROJECT IS: {}   |'.format(tot.index(final)+1))
             print('\t\t\t|     perss any key to continue...     |')
             input("\t\t\t|______________________________________|")
         elif selector=='2':
@@ -185,48 +185,49 @@ def COMPUTE(project):
             wait()
             cls()
             print("\t\t\t ______________________________________")
-            print("\t\t\t|       NPW OF EACH PROJECT IS :       |")
+            print("\t\t\t|       NEUA OF EACH PROJECT IS:       |")
             for counter in range(len(tot)):
-                tot[counter]=PAFACTOR(tot[counter],project[counter][2],project[counter][4])    
-                print("\t\t\t|   {}) NPW = {}".format(counter+1,tot[counter]))
+                # tot[counter]=PAFACTOR(tot[counter],project[counter][2],project[counter][4])    
+                print("\t\t\t|   {}) NEUA = {}".format(counter+1,tot[counter]))
             final=max(tot)
             print("\t\t\t|______________________________________|")
-            print('\t\t\t|  THE MOST ECONOMICAL PROJECT IS: {}  |'.format(tot.index(final)+1))
+            print('\t\t\t|  THE MOST ECONOMICAL PROJECT IS: {}   |'.format(tot.index(final)+1))
             print('\t\t\t|     perss any key to continue...     |')
             input("\t\t\t|______________________________________|")
         elif selector=='3':
-            wait()
-            cls()
-            print("\t\t\t ______________________________________")   
-            print("\t\t\t|        ROR for each project :        |") 
-            for counter in range(len(project)):
-                D=(project[counter][0]-project[counter][1])/project[counter][4]
-                for year in range(project[counter][4]):
-                    if year==0:
-                        tot[counter]=-project[counter][0]
-                        #tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
-                        ROR=symbols('ROR')
-                        equation=(ROR*((1+ROR)**project[counter][4]))/(((1+ROR)**project[counter][4])-1)
-                        tot[counter]=equation*tot[counter]
-                        #year=project[counter][4]-2
-                    elif year==project[counter][4]:
-                        #CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
-                        ROR=symbols('ROR')
-                        equation=(((1+ROR)**project[counter][4])-1)/ROR
-                        equation=equation*project[counter][1]
-                        tot[counter]=tot[counter]+equation
-                        project[counter][5]=solve(tot[counter])
-                        print("\t\t\t|   {})ROR={}                          |".format(counter+1,project[counter][5]))
-                    elif year==project[counter][4]-1:
-                        CFAT=((project[counter][7]-project[counter][6])-D)
-                        TX=project[counter][3]*CFAT
-                        if CFAT>0:
-                            CFAT=CFAT-TX
-                        tot[counter]=tot[counter]+CFAT
-            print("\t\t\t|______________________________________|")
-            print("\t\t\t|     press any key to continue...     |")   
-            print("\t\t\t|______________________________________|")
+            break
             # wait()
+            # cls()
+            # print("\t\t\t ______________________________________")   
+            # print("\t\t\t|        ROR for each project :        |") 
+            # for counter in range(len(project)):
+            #     D=(project[counter][0]-project[counter][1])/project[counter][4]
+            #     for year in range(project[counter][4]):
+            #         if year==0:
+            #             tot[counter]=-project[counter][0]
+            #             #tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
+            #             ROR=symbols('ROR')
+            #             equation=(ROR*((1+ROR)**project[counter][4]))/(((1+ROR)**project[counter][4])-1)
+            #             tot[counter]=equation*tot[counter]
+            #             #year=project[counter][4]-2
+            #         elif year==project[counter][4]:
+            #             #CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
+            #             ROR=symbols('ROR')
+            #             equation=(((1+ROR)**project[counter][4])-1)/ROR
+            #             equation=equation*project[counter][1]
+            #             tot[counter]=tot[counter]+equation
+            #             project[counter][5]=solve(tot[counter])
+            #             print("\t\t\t|   {})ROR={}                          |".format(counter+1,project[counter][5]))
+            #         elif year==project[counter][4]-1:
+            #             CFAT=((project[counter][7]-project[counter][6])-D)
+            #             TX=project[counter][3]*CFAT
+            #             if CFAT>0:
+            #                 CFAT=CFAT-TX
+            #             tot[counter]=tot[counter]+CFAT
+            # print("\t\t\t|______________________________________|")
+            # print("\t\t\t|     press any key to continue...     |")   
+            # print("\t\t\t|______________________________________|")
+            # # wait()
             # for counter1 in range(len(project)):
             #     for counter2 in range(len(project)-1):
             #         if project[counter2][0] > project[counter2 +1 ][0]:
