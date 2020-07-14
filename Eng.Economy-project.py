@@ -45,6 +45,16 @@ def AFFACTOR (f,i,n):
     a=(((1+i)**n)-1)/i
     a=a*f
     return a
+############################################### (A/F,%i,n) FACTOR ###################################################
+    factorFP=P*((1+i)^n);
+############################################### (A/F,%i,n) FACTOR ###################################################
+    factorFA=A*(i)/(((1+i)^n)-1);
+############################################### (A/F,%i,n) FACTOR ###################################################
+    factorPG=(G/i)*(((((1+i)^n)-1)/(i*((1+i)^n)))-(n/((1+i)^n)));
+############################################### (A/F,%i,n) FACTOR ###################################################
+    factorAG=G*((1/i)-(n/((1+i)^n)-1));
+############################################### (A/F,%i,n) FACTOR ###################################################
+    factorGP=(i*p)/(((((1+i)^n)-1)/(i*((1+i)^n)))-(n/((1+i)^n)));
 ################################################## DEFINE  FCN ######################################################
 def DEFINE(us):
     project=[[0,0,0,0,0,0,0,0]]
@@ -108,9 +118,10 @@ def COMPUTE(project):
         print("\t\t\t ______________________________________")
         print("\t\t\t|       CHOOSE METHOD BY NUMBER:       |")
         print("\t\t\t|   1) NPW                             |")
-        print("\t\t\t|   2) NEU                             |")
+        print("\t\t\t|   2) NEUA                            |")
         print("\t\t\t|   3) ROR                             |")
-        print("\t\t\t|   4) IGNORE!                         |")
+        print("\t\t\t|   4) B/C                             |")
+        print("\t\t\t|   5) IGNORE!                         |")
         selector=input("\t\t\t|______________________________________|\n")
         tot=[0]
         for counter in range(len(project)-1):
@@ -162,6 +173,10 @@ def COMPUTE(project):
             print('\n\n\t\t\t| THE MOST ECONOMICAL PROJECT IS {} |'.format(tot.index(final)+1))
             input('\t\t\t| perss any key to continue...      |')
         elif selector=='3':
+            wait()
+            cls()
+            print("\t\t\t ______________________________________")   
+            print("\t\t\t|        ROR for each project :        |") 
             for counter in range(len(project)):
                 D=(project[counter][0]-project[counter][1])/project[counter][4]
                 for year in range(project[counter][4]):
@@ -179,16 +194,51 @@ def COMPUTE(project):
                         equation=equation*project[counter][1]
                         tot[counter]=tot[counter]+equation
                         project[counter][5]=solve(tot[counter])
+                        print("\t\t\t|   {})ROR={}                          |".format(counter+1,project[counter][5]))
                     elif year==project[counter][4]-1:
                         CFAT=((project[counter][7]-project[counter][6])-D)
                         TX=project[counter][3]*CFAT
                         if CFAT>0:
                             CFAT=CFAT-TX
                         tot[counter]=tot[counter]+CFAT
-            
+            print("\t\t\t|______________________________________|")
+            print("\t\t\t|     press any key to continue...     |")   
+            print("\t\t\t|______________________________________|")
+            # wait()
+            # for counter1 in range(len(project)):
+            #     for counter2 in range(len(project)-1):
+            #         if project[counter2][0] > project[counter2 +1 ][0]:
+            #             project.insert(counter2,project[counter2 +1])
+            #             del project[counter2 +2]
+            # for counter in range(len(project)):
+            #     if project[counter][5] >= project[counter][2]:
+            #         if project[counter+1][5] >= project[counter][2] and counter+1 <= len(project) :
+            #             CFAT=project[counter+1][0]-project[counter][0]
+            #             equation=project[counter+1][1]-project[counter][1]
+            #             D=(project[counter][0]-project[counter][1])/project[counter][4]
+            #             D1=((project[counter][7]-project[counter][6])-D)
+            #             TX=project[counter][3]*D1
+            #             if D1>0:
+            #                 D1=D1-TX
+            #             D=(project[counter+1][0]-project[counter+1][1])/project[counter+1][4]
+            #             D2=((project[counter+1][7]-project[counter+][6])-D)
+            #             TX=project[counter+1][3]*D2
+            #             if D2>0:
+            #                 D2=D2-TX
+            #             D=D2-D1
+            #             ROR=symbols('ROR')
+            #             equation=(ROR*((1+ROR)**project[counter][4]))/(((1+ROR)**project[counter][4])-1)
+            #             tot[counter]=equation*tot[counter]
+            #             equation=(((1+ROR)**project[counter][4])-1)/ROR
+            #             equation=equation*project[counter][1]
+            #             project[counter][5]=solve(tot[counter])
+            #         else:
+
+            #     else:               
         elif selector=='4':
             break
-
+        elif selector=='5':
+            break
 ################################################### MAIN MENU #######################################################
 while True:
     cls()
@@ -196,8 +246,9 @@ while True:
     print("\t\t\t|             WELCOME USER!            |")
     print("\t\t\t|      PLEASE  SELECT BY NUMBER:       |")
     print("\t\t\t|   1) DEFINE NEW SITUATION            |")
-    print("\t\t\t|   2) ABOUT US!                       |")
-    print("\t\t\t|   3) EXIT!                           |")
+    print("\t\t\t|   2) USING FACTORS                   |")
+    print("\t\t\t|   3) ABOUT US!                       |")
+    print("\t\t\t|   4) EXIT!                           |")
     print("\t\t\t|______________________________________|")
     selector=input()
     if selector=='1' :
@@ -209,6 +260,28 @@ while True:
         project=DEFINE(us)
         COMPUTE(project)
     elif selector=='2' :
+        cls()
+        print("\t\t\t ______________________________________")
+        print("\t\t\t|               WHICH ONE?             |")
+        print("\t\t\t|      PLEASE  SELECT BY NUMBER:       |")
+        print("\t\t\t|   1) P/F          6) F/A             |")
+        print("\t\t\t|   2) P/A          7) A/P             |")
+        print("\t\t\t|   3) P/G          8) A/F             |")
+        print("\t\t\t|   4) F/P          9) A/G             |")
+        print("\t\t\t|   5) G/P         10) BACK            |")
+        print("\t\t\t|______________________________________|")
+        inselector=input()
+        cls()
+        print("\t\t\t ______________________________________")
+        print("\t\t\t|        PLEASE  ENTER NUMBERS:        |")
+        lifetime=input("\t\t\t|   ENTER LIFETIME: ")
+        interest=input("\t\t\t|   ENTER INTEREST RATE: ")
+        factor=input("\t\t\t|   ENTER FATOR: ")
+        print("\t\t\t|______________________________________|")
+        wait()
+        if inselector=='1':
+
+    elif selector=='3' :
             cls()
             print("\t\t\t ______________________________________ ")
             print("\t\t\t|             CREATED BY:              |")
@@ -230,7 +303,7 @@ while True:
                     pass
             else :
                 pass        
-    elif selector=='3' :
+    elif selector=='4' :
         cls()
         exit=input("\n\n\t\t\tARE YOU SURE?(YES or NO)\n")
         if exit.upper()=="YES" or exit.upper()=='Y' :
