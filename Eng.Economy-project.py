@@ -153,13 +153,18 @@ def COMPUTE(project):
                         if CFAT>0:
                             CFAT=CFAT-TX
                         tot[counter]=tot[counter]+CFAT
-            for counter in range(len(tot)):
-                tot[counter]=PAFACTOR(tot[counter],project[counter][2],project[counter][4])
-            final=max(tot)
             wait()
             cls()
-            print('\n\n\t\t\t| THE MOST ECONOMICAL PROJECT IS {} |'.format(tot.index(final)+1))
-            input('\t\t\t| perss any key to continue...      |')
+            print("\t\t\t ______________________________________")
+            print("\t\t\t|       NPW OF EACH PROJECT IS :       |")
+            for counter in range(len(tot)):
+                tot[counter]=PAFACTOR(tot[counter],project[counter][2],project[counter][4])    
+                print("\t\t\t|   {}) NPW = {}".format(counter+1,tot[counter]))
+            final=max(tot)
+            print("\t\t\t|______________________________________|")
+            print('\t\t\t|  THE MOST ECONOMICAL PROJECT IS: {}  |'.format(tot.index(final)+1))
+            print('\t\t\t|     perss any key to continue...     |')
+            input("\t\t\t|______________________________________|")
         elif selector=='2':
             for counter in range(len(project)):
                 D=(project[counter][0]-project[counter][1])/project[counter][4]
@@ -177,11 +182,18 @@ def COMPUTE(project):
                         if CFAT>0:
                             CFAT=CFAT-TX
                         tot[counter]=tot[counter]+CFAT
-            final=max(tot)
             wait()
             cls()
-            print('\n\n\t\t\t| THE MOST ECONOMICAL PROJECT IS {} |'.format(tot.index(final)+1))
-            input('\t\t\t| perss any key to continue...      |')
+            print("\t\t\t ______________________________________")
+            print("\t\t\t|       NPW OF EACH PROJECT IS :       |")
+            for counter in range(len(tot)):
+                tot[counter]=PAFACTOR(tot[counter],project[counter][2],project[counter][4])    
+                print("\t\t\t|   {}) NPW = {}".format(counter+1,tot[counter]))
+            final=max(tot)
+            print("\t\t\t|______________________________________|")
+            print('\t\t\t|  THE MOST ECONOMICAL PROJECT IS: {}  |'.format(tot.index(final)+1))
+            print('\t\t\t|     perss any key to continue...     |')
+            input("\t\t\t|______________________________________|")
         elif selector=='3':
             wait()
             cls()
