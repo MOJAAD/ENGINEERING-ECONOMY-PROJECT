@@ -45,16 +45,26 @@ def AFFACTOR (f,i,n):
     a=(((1+i)**n)-1)/i
     a=a*f
     return a
-############################################### (A/F,%i,n) FACTOR ###################################################
-    factorFP=P*((1+i)^n);
-############################################### (A/F,%i,n) FACTOR ###################################################
-    factorFA=A*(i)/(((1+i)^n)-1);
-############################################### (A/F,%i,n) FACTOR ###################################################
-    factorPG=(G/i)*(((((1+i)^n)-1)/(i*((1+i)^n)))-(n/((1+i)^n)));
-############################################### (A/F,%i,n) FACTOR ###################################################
-    factorAG=G*((1/i)-(n/((1+i)^n)-1));
-############################################### (A/F,%i,n) FACTOR ###################################################
-    factorGP=(i*p)/(((((1+i)^n)-1)/(i*((1+i)^n)))-(n/((1+i)^n)));
+############################################### (F/P,%i,n) FACTOR ###################################################
+def FPFACTOR (p,i,n):
+    f=p*((1+i)^n)
+    return f
+############################################### (F/A,%i,n) FACTOR ###################################################
+def FAFACTOR (a,i,n):
+    f=a*(i)/(((1+i)^n)-1)
+    return f
+############################################### (P/G,%i,n) FACTOR ###################################################
+def PGFACTOR (g,i,n):
+    p=(g/i)*(((((1+i)^n)-1)/(i*((1+i)^n)))-(n/((1+i)^n)))
+    return p
+############################################### (A/G,%i,n) FACTOR ###################################################
+def AGFACTOR (g,i,n):
+    a=g*((1/i)-(n/((1+i)^n)-1))
+    return a
+############################################### (G/P,%i,n) FACTOR ###################################################
+def GPFACTOR (p,i,n):
+    g=(i*p)/(((((1+i)^n)-1)/(i*((1+i)^n)))-(n/((1+i)^n)))
+    return g
 ################################################## DEFINE  FCN ######################################################
 def DEFINE(us):
     project=[[0,0,0,0,0,0,0,0]]
@@ -274,13 +284,91 @@ while True:
         cls()
         print("\t\t\t ______________________________________")
         print("\t\t\t|        PLEASE  ENTER NUMBERS:        |")
-        lifetime=input("\t\t\t|   ENTER LIFETIME: ")
-        interest=input("\t\t\t|   ENTER INTEREST RATE: ")
-        factor=input("\t\t\t|   ENTER FATOR: ")
-        print("\t\t\t|______________________________________|")
-        wait()
+        try:
+            lifetime=int(input("\t\t\t|   ENTER LIFETIME: "))
+            interest=int(input("\t\t\t|   ENTER INTEREST RATE (in persent): "))
+            if interest<=0 or interest>=100:
+                interest=int("typeerror")
+            else :
+                interest=interest/100
+            factor=int(input("\t\t\t|   ENTER FATOR: "))
+            print("\t\t\t|______________________________________|")
+        except ValueError or TypeError:
+            print("\t\t\t|______________________________________|")
+            print('\n\n\t\t\t\t   please enter correctly!')
+            time.sleep(1)
         if inselector=='1':
-
+            wait()
+            factor=PFFACTOR(factor,interest,lifetime)
+            cls()
+            print("\t\t\t ______________________________________")
+            print("\t\t\t| THE RESULT IS: {}".format(factor))
+            print("\t\t\t|______________________________________|")
+            input()
+        elif inselector=='2':
+            wait()
+            factor=PAFACTOR(factor,interest,lifetime)
+            cls()
+            print("\t\t\t ______________________________________")
+            print("\t\t\t| THE RESULT IS: {}".format(factor))
+            print("\t\t\t|______________________________________|")
+            input()
+        elif inselector=='3':
+            wait()
+            factor=PGFACTOR(factor,interest,lifetime)
+            cls()
+            print("\t\t\t ______________________________________")
+            print("\t\t\t| THE RESULT IS: {}".format(factor))
+            print("\t\t\t|______________________________________|")
+            input()
+        elif inselector=='4':
+            wait()
+            factor=FPFACTOR(factor,interest,lifetime)
+            cls()
+            print("\t\t\t ______________________________________")
+            print("\t\t\t| THE RESULT IS: {}".format(factor))
+            print("\t\t\t|______________________________________|")
+            input()
+        elif inselector=='5':
+            wait()
+            factor=GPFACTOR(factor,interest,lifetime)
+            cls()
+            print("\t\t\t ______________________________________")
+            print("\t\t\t| THE RESULT IS: {}".format(factor))
+            print("\t\t\t|______________________________________|")
+            input()
+        elif inselector=='6':
+            wait()
+            factor=FAFACTOR(factor,interest,lifetime)
+            cls()
+            print("\t\t\t ______________________________________")
+            print("\t\t\t| THE RESULT IS: {}".format(factor))
+            print("\t\t\t|______________________________________|")
+            input()
+        elif inselector=='7':
+            wait()
+            factor=APFACTOR(factor,interest,lifetime)
+            cls()
+            print("\t\t\t ______________________________________")
+            print("\t\t\t| THE RESULT IS: {}".format(factor))
+            print("\t\t\t|______________________________________|")
+            input()
+        elif inselector=='8':
+            wait()
+            factor=AFACTOR(factor,interest,lifetime)
+            cls()
+            print("\t\t\t ______________________________________")
+            print("\t\t\t| THE RESULT IS: {}".format(factor))
+            print("\t\t\t|______________________________________|")
+            input()
+        elif inselector=='9':
+            wait()
+            factor=AGFACTOR(factor,interest,lifetime)
+            cls()
+            print("\t\t\t ______________________________________")
+            print("\t\t\t| THE RESULT IS: {}".format(factor))
+            print("\t\t\t|______________________________________|")
+            input()
     elif selector=='3' :
             cls()
             print("\t\t\t ______________________________________ ")
