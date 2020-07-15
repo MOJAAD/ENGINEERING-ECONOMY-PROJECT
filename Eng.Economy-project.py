@@ -42,7 +42,7 @@ def APFACTOR (p,i,n):
     return a
 ############################################### (A/F,%i,n) FACTOR ###################################################
 def AFFACTOR (f,i,n):
-    a=(((1+i)**n)-1)/i
+    a=i/(((1+i)**n)-1)
     a=a*f
     return a
 ############################################### (F/P,%i,n) FACTOR ###################################################
@@ -144,7 +144,7 @@ def COMPUTE(project):
                         tot[counter]=-project[counter][0]
                         tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
                         #year=project[counter][4]-2
-                    elif year==project[counter][4]:
+                    elif year==project[counter][4]-1:
                         CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
                         tot[counter]=tot[counter]+CFAT
                         CFAT=(project[counter][7]-project[counter][6])
@@ -174,7 +174,7 @@ def COMPUTE(project):
                         tot[counter]=-project[counter][0]
                         tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
                         #year=project[counter][4]-2
-                    elif year==project[counter][4]:
+                    elif year==project[counter][4]-1:
                         CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
                         tot[counter]=tot[counter]+CFAT
                         CFAT=(project[counter][7]-project[counter][6])
@@ -268,7 +268,7 @@ def COMPUTE(project):
                 D=(project[counter][0]-project[counter][1])/project[counter][4]
                 for year in range(project[counter][4]):
                     if year==0:
-                        #tot[counter][0]=project[counter][0]
+                        tot[counter][0]=project[counter][0]
                         tot[counter][0]=APFACTOR(tot[counter][0],project[counter][2],project[counter][4])
                         #year=project[counter][4]-2
                     elif year==project[counter][4]-1:
@@ -288,6 +288,7 @@ def COMPUTE(project):
             for counter in range(len(tot)):
                 project[counter][5]=tot[counter][1]/tot[counter][0]    
                 print("\t\t\t|   {}) B/C = {}      |".format(counter+1,project[counter][5]))
+                tot[counter].append(project[counter][0])
             counter=0
             while counter<=len(tot)-1:
                 if (tot[counter][1]/tot[counter][0]) <= 0:
@@ -302,23 +303,26 @@ def COMPUTE(project):
                     else :
                         DELTA=((tot[counter+1][1]-tot[counter][1])/(tot[counter+1][0]-tot[counter][0]))
                     if DELTA >= 1:
-                        if project[counter][0] > project[counter+1][0] :
+                        if tot[counter+1][2] < tot[counter][2] :
                             tot[counter+1][1]=tot[counter][1]
                             tot[counter+1][0]=tot[counter][0]
+                            tot[counter+1][2]=tot[counter][2]
                             if (tot[counter+1][0]-tot[counter][0]) == 0 and (tot[counter+1][1]-tot[counter][1]) < 0:
                                 tot[counter+1][1]=tot[counter][1]
                                 tot[counter+1][0]=tot[counter][0]
+                                tot[counter+1][2]=tot[counter][2]
                         else :
                             pass
                     else:
-                        if project[counter][0] < project[counter+1][0] :
+                        if tot[counter+1][2] > tot[counter][2] :
                             tot[counter+1][1]=tot[counter][1]
                             tot[counter+1][0]=tot[counter][0]
+                            tot[counter+1][2]=tot[counter][2]
                         else :
                             pass
             if len(tot)!=0 :
                 for counter in range(len(tot)):
-                    if project[counter][5]==tot[len(tot)-1]:
+                    if project[counter][5]==tot[len(tot)-1][1]/tot[len(tot)-1][0]:
                         DELTA=counter
                         break
             else :
@@ -435,7 +439,7 @@ while True:
             input()
         elif inselector=='8':
             wait()
-            factor=AFACTOR(factor,interest,lifetime)
+            factor=AFFACTOR(factor,interest,lifetime)
             cls()
             print("\t\t\t ______________________________________")
             print("\t\t\t| THE RESULT IS: {}".format(factor))
