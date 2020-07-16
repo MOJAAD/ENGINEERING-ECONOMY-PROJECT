@@ -14,6 +14,47 @@ from sympy import symbols,solve
 ################################################# CLEAR SCREEN ######################################################
 def cls():
     os.system(['clear','cls'][os.name=='nt'])
+############################################### WELCOME ANIMATION ###################################################
+def welcome_animation():
+    cls()
+    print("\n\n\n\n\n\t\t\t\t       *\n\n\n\n\n\n\n")
+    time.sleep(0.08)
+    cls()
+    print("\n\n\n\n\t\t\t\t      * *\n\t\t\t\t       *\n\t\t\t\t      * *\n\n\n\n\n\n")
+    time.sleep(0.08)
+    cls()
+    print("\n\n\n\t\t\t\t    **   **\n\t\t\t\t      * *\n\t\t\t\t       *\n\t\t\t\t      * *\n\t\t\t\t    **   **\n\n\n\n\n")
+    time.sleep(0.08)
+    cls()
+    print("\n\n\t\t\t\t ****     ****\n\t\t\t\t    **   **\n\t\t\t\t      * *\n\t\t\t\t       *\n\t\t\t\t      * *\n\t\t\t\t    **   **\n\t\t\t\t ****     ****\n\n\n\n")
+    time.sleep(0.08)
+    cls()
+    print("\n\t\t\t    ********       ********\n\t\t\t\t ****     ****\n\t\t\t\t    **   **\n\t\t\t\t      * *\n\t\t\t\t       *\n\t\t\t\t      * *\n\t\t\t\t    **   **\n\t\t\t\t ****     ****\n\t\t\t    ********       ********\n\n\n")
+    time.sleep(0.8)
+    cls()
+    print("\n\t\t\t    ********       ********\n\t\t\t\t ****     ****\n\t\t\t\t    **   **\n\t\t\t\t      * *\n\t\t\t\t  *!WELCOME!*\n\t\t\t\t      * *\n\t\t\t\t    **   **\n\t\t\t\t ****     ****\n\t\t\t    ********       ********\n\n\n")      
+    time.sleep(1)
+################################################# BYE ANIMATION #####################################################
+def bye_animation():
+    cls()
+    print("\n\t\t\t    ********       ********\n\t\t\t\t ****     ****\n\t\t\t\t    **   **\n\t\t\t\t      * *\n\t\t\t\t    *!BYE!*\n\t\t\t\t      * *\n\t\t\t\t    **   **\n\t\t\t\t ****     ****\n\t\t\t    ********       ********\n\n\n") 
+    time.sleep(0.8)
+    cls()
+    print("\n\t\t\t    ********       ********\n\t\t\t\t ****     ****\n\t\t\t\t    **   **\n\t\t\t\t      * *\n\t\t\t\t       *\n\t\t\t\t      * *\n\t\t\t\t    **   **\n\t\t\t\t ****     ****\n\t\t\t    ********       ********\n\n\n")
+    time.sleep(0.08)
+    cls()
+    print("\n\n\t\t\t\t ****     ****\n\t\t\t\t    **   **\n\t\t\t\t      * *\n\t\t\t\t       *\n\t\t\t\t      * *\n\t\t\t\t    **   **\n\t\t\t\t ****     ****\n\n\n\n")
+    time.sleep(0.08)
+    cls()
+    print("\n\n\n\t\t\t\t    **   **\n\t\t\t\t      * *\n\t\t\t\t       *\n\t\t\t\t      * *\n\t\t\t\t    **   **\n\n\n\n\n")
+    time.sleep(0.08)
+    cls()
+    print("\n\n\n\n\t\t\t\t      * *\n\t\t\t\t       *\n\t\t\t\t      * *\n\n\n\n\n\n")
+    time.sleep(0.08)
+    cls()
+    print("\n\n\n\n\n\t\t\t\t       *\n\n\n\n\n\n\n")
+    time.sleep(0.1)
+    cls()
 ################################################### WAIT  FCN #######################################################
 def wait():
     value=random.random()
@@ -327,6 +368,7 @@ def COMPUTE(project):
         elif selector=='5':
             break
 ################################################### MAIN MENU #######################################################
+welcome_animation()
 while True:
     cls()
     print("\t\t\t ______________________________________")
@@ -463,6 +505,7 @@ while True:
                 cls()
                 exit=input("\n\n\t\t\tARE YOU SURE?(YES or NO)\n")
                 if exit.upper()=="YES" or exit.upper()=='Y' :
+                    bye_animation()
                     sys.exit(0)
                 elif exit.upper()=="NO" or exit.upper()=='N' :
                     pass
@@ -472,6 +515,7 @@ while True:
         cls()
         exit=input("\n\n\t\t\tARE YOU SURE?(YES or NO)\n")
         if exit.upper()=="YES" or exit.upper()=='Y' :
+            bye_animation()
             sys.exit(0)
         elif exit.upper()=="NO" or exit.upper()=='N' :
             pass
