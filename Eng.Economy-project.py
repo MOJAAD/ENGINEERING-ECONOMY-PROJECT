@@ -9,7 +9,7 @@
 #                                                                                                                   #
 #################################################### MODULES ########################################################
 import sys,time,os,random
-#from sympy import symbols,solve
+from sympy import symbols,solve
 ################################################# CLEAR SCREEN ######################################################
 def cls():
     os.system(['clear','cls'][os.name=='nt'])
@@ -198,68 +198,70 @@ def COMPUTE(project):
             input("\t\t\t|______________________________________|")
         elif selector=='3':
             break
+            wait()
+            cls()
+            print("\t\t\t ______________________________________")   
+            print("\t\t\t|       ROR FOR EACH PROJECT IS:       |") 
+            for counter in range(len(project)):
+                D=(project[counter][0]-project[counter][1])/project[counter][4]
+                for year in range(project[counter][4]):
+                    if year==0:
+                        tot[counter]=-project[counter][0]
+                        #tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
+                        ROR=symbols('ROR')
+                        equation=(ROR*((1+ROR)**project[counter][4]))/(((1+ROR)**project[counter][4])-1)
+                        tot[counter]=equation*tot[counter]
+                        #year=project[counter][4]-2
+                    elif year==project[counter][4]-1:
+                        #CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
+                        ROR=symbols('ROR')
+                        equation=ROR/(((1+ROR)**project[counter][4])-1)
+                        equation=equation*project[counter][1]
+                        tot[counter]=tot[counter]+equation
+                        project[counter][5]=solve(tot[counter])
+                        print("\t\t\t|   {}) ROR = {}".format(counter+1,project[counter][5]))
+                        CFAT=(project[counter][7]-project[counter][6])
+                        TX=project[counter][3]*(CFAT-D)
+                        if CFAT>0:
+                            CFAT=CFAT-TX
+                        tot[counter]=tot[counter]+CFAT
+                    #elif year==project[counter][4]-1:
+            for counter1 in range(len(project)):
+                for counter2 in range(len(project)-1):
+                    if project[counter2][0] > project[counter2 +1 ][0]:
+                        project.insert(counter2,project[counter2 +1])
+                        del project[counter2 +2]
+            for counter in range(len(project)):
+                if project[counter][5] >= project[counter][2]:
+                    if project[counter+1][5] >= project[counter][2] and counter+1 <= len(project) :
+                        CFAT=project[counter+1][0]-project[counter][0]
+                        equation=project[counter+1][1]-project[counter][1]
+                        D=(project[counter][0]-project[counter][1])/project[counter][4]
+                        D1=(project[counter][7]-project[counter][6])
+                        TX=project[counter][3]*(D1-D)
+                        if D1>0:
+                            D1=D1-TX
+                        D=(project[counter+1][0]-project[counter+1][1])/project[counter+1][4]
+                        D2=(project[counter+1][7]-project[counter+1][6])
+                        TX=project[counter+1][3]*(D2-D)
+                        if D2>0:
+                            D2=D2-TX
+                        D=D2-D1
+                        ROR=symbols('ROR')
+                        equation=(ROR*((1+ROR)**project[counter][4]))/(((1+ROR)**project[counter][4])-1)
+                        tot[counter]=equation*tot[counter]
+                        equation=(((1+ROR)**project[counter][4])-1)/ROR
+                        equation=equation*project[counter][1]
+                        project[counter][5]=solve(tot[counter])
+                    else:
+                        pass
+                else:   
+                    pass               
+            print("\t\t\t|______________________________________|")
+            print("\t\t\t|     press any key to continue...     |")   
+            print("\t\t\t|______________________________________|")
             # wait()
-            # cls()
-            # print("\t\t\t ______________________________________")   
-            # print("\t\t\t|       ROR FOR EACH PROJECT IS:       |") 
-            # for counter in range(len(project)):
-            #     D=(project[counter][0]-project[counter][1])/project[counter][4]
-            #     for year in range(project[counter][4]):
-            #         if year==0:
-            #             tot[counter]=-project[counter][0]
-            #             #tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
-            #             ROR=symbols('ROR')
-            #             equation=(ROR*((1+ROR)**project[counter][4]))/(((1+ROR)**project[counter][4])-1)
-            #             tot[counter]=equation*tot[counter]
-            #             #year=project[counter][4]-2
-            #         elif year==project[counter][4]:
-            #             #CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
-            #             ROR=symbols('ROR')
-            #             equation=(((1+ROR)**project[counter][4])-1)/ROR
-            #             equation=equation*project[counter][1]
-            #             tot[counter]=tot[counter]+equation
-            #             project[counter][5]=solve(tot[counter])
-            #             print("\t\t\t|   {}) ROR = {}".format(counter+1,project[counter][5]))
-            #         elif year==project[counter][4]-1:
-            #             CFAT=((project[counter][7]-project[counter][6])-D)
-            #             TX=project[counter][3]*CFAT
-            #             if CFAT>0:
-            #                 CFAT=CFAT-TX
-            #             tot[counter]=tot[counter]+CFAT
-            # print("\t\t\t|______________________________________|")
-            # print("\t\t\t|     press any key to continue...     |")   
-            # print("\t\t\t|______________________________________|")
-            # # wait()
-            # for counter1 in range(len(project)):
-            #     for counter2 in range(len(project)-1):
-            #         if project[counter2][0] > project[counter2 +1 ][0]:
-            #             project.insert(counter2,project[counter2 +1])
-            #             del project[counter2 +2]
-            # for counter in range(len(project)):
-            #     if project[counter][5] >= project[counter][2]:
-            #         if project[counter+1][5] >= project[counter][2] and counter+1 <= len(project) :
-            #             CFAT=project[counter+1][0]-project[counter][0]
-            #             equation=project[counter+1][1]-project[counter][1]
-            #             D=(project[counter][0]-project[counter][1])/project[counter][4]
-            #             D1=((project[counter][7]-project[counter][6])-D)
-            #             TX=project[counter][3]*D1
-            #             if D1>0:
-            #                 D1=D1-TX
-            #             D=(project[counter+1][0]-project[counter+1][1])/project[counter+1][4]
-            #             D2=((project[counter+1][7]-project[counter+][6])-D)
-            #             TX=project[counter+1][3]*D2
-            #             if D2>0:
-            #                 D2=D2-TX
-            #             D=D2-D1
-            #             ROR=symbols('ROR')
-            #             equation=(ROR*((1+ROR)**project[counter][4]))/(((1+ROR)**project[counter][4])-1)
-            #             tot[counter]=equation*tot[counter]
-            #             equation=(((1+ROR)**project[counter][4])-1)/ROR
-            #             equation=equation*project[counter][1]
-            #             project[counter][5]=solve(tot[counter])
-            #         else:
-
-            #     else:               
+                     
         elif selector=='4':
             tot=[[0,0]]
             for counter in range(len(project)-1):
@@ -279,8 +281,7 @@ def COMPUTE(project):
                         if CFAT>0:
                             CFAT=CFAT-TX
                         tot[counter][1]=tot[counter][1]+CFAT
-                    #elif year==project[counter][4]-2:
-                        
+                    #elif year==project[counter][4]-2:          
             wait()
             cls()
             print("\t\t\t ______________________________________")
