@@ -243,32 +243,70 @@ def COMPUTE(project):
             #             tot.insert(counter2,tot[counter2 +1])
             #             del project[counter2 +2]
             #             del tot[counter2 +2]
-            counter=0
-            while counter<=len(tot)-1:
-                if project[counter][5] < project[counter][2] :
-                    del tot[counter]
-                    counter -= 1
-                counter +=1
-            del counter
-            for counter in range(len(project-1)):
-                D=(project[counter][0]-project[counter][1])/project[counter][4]
-                for year in range(project[counter][4]):
-                    if year==0:
-                        tot[counter]=-project[counter][0]
-                        tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
-                        #year=project[counter][4]-2
-                    elif year==project[counter][4]-1:
-                        CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
-                        tot[counter]=tot[counter]+CFAT
-                        CFAT=(project[counter][7]-project[counter][6])
-                        TX=project[counter][3]*(CFAT-D)
-                        if CFAT>0:
-                            CFAT=CFAT-TX
-                        tot[counter]=tot[counter]+CFAT
+            # counter=0
+            # while counter<=len(tot)-1:
+            #     if project[counter][5] < project[counter][2] :
+            #         del tot[counter]
+            #         counter -= 1
+            #     counter +=1
+            # del counter
+            for counter in range(len(project)-1):
+                if counter +1 <= len(project)-1 :
+                    for year in range(project[counter][4]):
+                        if year==0:
+                            tot[counter][0]=-project[counter][0]
+                            tot[counter][0]=APFACTOR(tot[counter][0],project[counter][2],project[counter][4])
+                            tot[counter+1][0]=-project[counter+1][0]
+                            tot[counter+1][0]=APFACTOR(tot[counter+1][0],project[counter+1][2],project[counter+1][4])
+                        elif year==project[counter][4]-1:
+                            D=(project[counter][0]-project[counter][1])/project[counter][4]
+                            CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
+                            tot[counter][0]=tot[counter][0]+CFAT
+                            CFAT=(project[counter][7]-project[counter][6])
+                            TX=project[counter][3]*(CFAT-D)
+                            if CFAT>0:
+                                CFAT=CFAT-TX
+                            tot[counter][0]=tot[counter][0]+CFAT
+                            D=(project[counter+1][0]-project[counter+1][1])/project[counter+1][4]
+                            CFAT=AFFACTOR(project[counter+1][1],project[counter+1][2],project[counter+1][4])
+                            tot[counter+1][0]=tot[counter+1][0]+CFAT
+                            CFAT=(project[counter+1][7]-project[counter+1][6])
+                            TX=project[counter+1][3]*(CFAT-D)
+                            if CFAT>0:
+                                CFAT=CFAT-TX
+                            tot[counter+1][0]=tot[counter+1][0]+CFAT
+            for counter in range(len(tot)-1):
+                if counter+1 <= len(tot)-1:
+                    DELTA=tot[counter+1][0]-tot[counter][0]
+                    if DELTA >= 0:
+                        if tot[counter+1][2] < tot[counter][2] :
+                            tot[counter+1][1]=tot[counter][1]
+                            tot[counter+1][0]=tot[counter][0]
+                            # tot[counter+1][2]=tot[counter][2]
+                            # if (tot[counter+1][0]-tot[counter][0]) == 0 and (tot[counter+1][1]-tot[counter][1]) < 0:
+                            #     tot[counter+1][1]=tot[counter][1]
+                            #     tot[counter+1][0]=tot[counter][0]
+                            #     tot[counter+1][2]=tot[counter][2]
+                        else :
+                            pass
+                    else:
+                        if tot[counter+1][2] > tot[counter][2] :
+                            tot[counter+1][1]=tot[counter][1]
+                            tot[counter+1][0]=tot[counter][0]
+                            # tot[counter+1][2]=tot[counter][2]
+                        else :
+                            pass                
+            if len(tot)!=0 :
+                for counter in range(len(tot)):
+                    if project[counter][5]==tot[len(tot)-1][1]:
+                        DELTA=counter
+                        break
+            else :
+                DELTA=0
             print("\t\t\t|______________________________________|")
-            print("\t\t\t|     press any key to continue...     |")   
-            print("\t\t\t|______________________________________|")
-            # wait()                   
+            print('\t\t\t|  THE MOST ECONOMICAL PROJECT IS: {}   |'.format(DELTA+1))
+            print('\t\t\t|     perss any key to continue...     |')
+            input("\t\t\t|______________________________________|")
         elif selector=='4':
             tot=[[0,0]]
             for counter in range(len(project)-1):
