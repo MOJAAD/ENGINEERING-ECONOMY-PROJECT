@@ -231,7 +231,7 @@ def COMPUTE(project):
                         if CFAT>0:
                             CFAT=CFAT-TX
                         tot[counter][0]=tot[counter][0]+CFAT
-                        project[counter][5]=solve(tot[counter][0])
+                        #project[counter][5]=solve(tot[counter][0])
                         tot[counter][0]=project[counter][5]
                         tot[counter][1]=project[counter][0]
                         print("\t\t\t|   {}) ROR = {}".format(counter+1,project[counter][5]*100))
@@ -279,7 +279,7 @@ def COMPUTE(project):
                 if counter+1 <= len(tot)-1:
                     DELTA=tot[counter+1][0]-tot[counter][0]
                     if DELTA >= 0:
-                        if tot[counter+1][2] < tot[counter][2] :
+                        if tot[counter+1][1] < tot[counter][1] :
                             tot[counter+1][1]=tot[counter][1]
                             tot[counter+1][0]=tot[counter][0]
                             # tot[counter+1][2]=tot[counter][2]
@@ -290,7 +290,7 @@ def COMPUTE(project):
                         else :
                             pass
                     else:
-                        if tot[counter+1][2] > tot[counter][2] :
+                        if tot[counter+1][1] > tot[counter][1] :
                             tot[counter+1][1]=tot[counter][1]
                             tot[counter+1][0]=tot[counter][0]
                             # tot[counter+1][2]=tot[counter][2]
@@ -298,7 +298,7 @@ def COMPUTE(project):
                             pass                
             if len(tot)!=0 :
                 for counter in range(len(tot)):
-                    if project[counter][5]==tot[len(tot)-1][1]:
+                    if project[counter][0]==tot[len(tot)-1][1]:
                         DELTA=counter
                         break
             else :
