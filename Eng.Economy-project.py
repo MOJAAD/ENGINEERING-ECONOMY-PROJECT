@@ -3,8 +3,8 @@
 #                                                                                                                   #
 #                                             IN THE NAME OG GOD                                                    #
 #                                            PROJECT  OF  ECONOMY                                                   #
-#                                           CRAETED BY :    MOJAAD                                                  #
-#                                             IN DATE: 2020/07/14                                                   #
+#                                       CRAETED BY: MOHAMMADJAVAD ADEL                                              #
+#                                             IN DATE: 2020/07/17                                                   #
 #                                                                                                                   #
 #                                                                                                                   #
 #################################################### MODULES ########################################################
@@ -93,21 +93,6 @@ def DEFINE(us):
             else:
                 project[counter][3]=project[counter][3]/100
             project[counter][4]=int(input("\t\t\t| ENTER LIFETIME(years):"))
-            # r=int(input("\t\t\t| ENTER INTEREST RATE(in persent):"))
-            # if r<=0 or r>=100:
-            #     r=int("typeerror")
-            # print("\t\t\t|______________________________________|")
-            # print("\t\t\t|    CHOOSE PRIOD OF INTEREST RATE:    |")
-            # print("\t\t\t| 1) ANNUAL                            |")
-            # print("\t\t\t| 2) SEMIANNUAL                        |")
-            # print("\t\t\t| 4) TRIMESTER                         |")
-            # print("\t\t\t| 12) MOUNTLY                          |")
-            # t=input("\t\t\t|______________________________________|")
-            # if int(t)==1 or int(t)==2 or int(t)==4 or int(t)==12 :
-            #     r=r/100
-            #     project[counter][5]=((1+r)**int(t))-1
-            # else:
-            #     project[counter][4]=int('typeerror')
             project[counter][6]=int(input("\t\t\t| ENTER ANNUAL PAYMENT:"))
             project[counter][7]=int(input("\t\t\t| ENTER ANNUAL INCOME:"))    
             counter=counter+1
@@ -143,7 +128,6 @@ def COMPUTE(project):
                     if year==0:
                         tot[counter]=-project[counter][0]
                         tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
-                        #year=project[counter][4]-2
                     elif year==project[counter][4]-1:
                         CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
                         tot[counter]=tot[counter]+CFAT
@@ -152,8 +136,6 @@ def COMPUTE(project):
                         if CFAT>0:
                             CFAT=CFAT-TX
                         tot[counter]=tot[counter]+CFAT
-                    # elif year==project[counter][4]-1:
-                        
             wait()
             cls()
             print("\t\t\t ______________________________________")
@@ -173,7 +155,6 @@ def COMPUTE(project):
                     if year==0:
                         tot[counter]=-project[counter][0]
                         tot[counter]=APFACTOR(tot[counter],project[counter][2],project[counter][4])
-                        #year=project[counter][4]-2
                     elif year==project[counter][4]-1:
                         CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
                         tot[counter]=tot[counter]+CFAT
@@ -182,14 +163,11 @@ def COMPUTE(project):
                         if CFAT>0:
                             CFAT=CFAT-TX
                         tot[counter]=tot[counter]+CFAT
-                    # elif year==project[counter][4]-1:
-                        
             wait()
             cls()
             print("\t\t\t ______________________________________")
             print("\t\t\t|       NEUA OF EACH PROJECT IS:       |")
-            for counter in range(len(tot)):
-                # tot[counter]=PAFACTOR(tot[counter],project[counter][2],project[counter][4])    
+            for counter in range(len(tot)):  
                 print("\t\t\t|   {}) NEUA = {}".format(counter+1,tot[counter]))
             final=max(tot)
             print("\t\t\t|______________________________________|")
@@ -209,19 +187,10 @@ def COMPUTE(project):
                 for year in range(project[counter][4]):
                     if year==0:
                         tot[counter][0]=-project[counter][0]
-                        #tot[counter][1]=APFACTOR(tot[counter][0],project[counter][2],project[counter][4])
                         ROR=symbols('ROR')
                         equation=(ROR*((1+ROR)**project[counter][4]))/(((1+ROR)**project[counter][4])-1)
                         tot[counter][0]=equation*tot[counter][0]
-                        #year=project[counter][4]-2
                     elif year==project[counter][4]-1:
-                        #CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
-                        #tot[counter][1]=tot[counter][1]+CFAT
-                        #CFAT=(project[counter][7]-project[counter][6])
-                        #TX=project[counter][3]*(CFAT-D)
-                        #if CFAT>0:
-                        #    CFAT=CFAT-TX
-                        #tot[counter][1]=tot[counter][1]+CFAT
                         ROR=symbols('ROR')
                         equation=ROR/(((1+ROR)**project[counter][4])-1)
                         equation=equation*project[counter][1]
@@ -235,21 +204,6 @@ def COMPUTE(project):
                         tot[counter][0]=project[counter][5]
                         tot[counter][1]=project[counter][0]
                         print("\t\t\t|   {}) ROR = {}".format(counter+1,project[counter][5]*100))
-                    #elif year==project[counter][4]-1:
-            # for counter1 in range(len(project)):
-            #     for counter2 in range(len(project)-1):
-            #         if project[counter2][0] > project[counter2 +1 ][0]:
-            #             project.insert(counter2,project[counter2 +1])
-            #             tot.insert(counter2,tot[counter2 +1])
-            #             del project[counter2 +2]
-            #             del tot[counter2 +2]
-            # counter=0
-            # while counter<=len(tot)-1:
-            #     if project[counter][5] < project[counter][2] :
-            #         del tot[counter]
-            #         counter -= 1
-            #     counter +=1
-            # del counter
             for counter in range(len(project)-1):
                 if counter +1 <= len(project)-1 :
                     for year in range(project[counter][4]):
@@ -282,18 +236,12 @@ def COMPUTE(project):
                         if tot[counter+1][1] < tot[counter][1] :
                             tot[counter+1][1]=tot[counter][1]
                             tot[counter+1][0]=tot[counter][0]
-                            # tot[counter+1][2]=tot[counter][2]
-                            # if (tot[counter+1][0]-tot[counter][0]) == 0 and (tot[counter+1][1]-tot[counter][1]) < 0:
-                            #     tot[counter+1][1]=tot[counter][1]
-                            #     tot[counter+1][0]=tot[counter][0]
-                            #     tot[counter+1][2]=tot[counter][2]
                         else :
                             pass
                     else:
                         if tot[counter+1][1] > tot[counter][1] :
                             tot[counter+1][1]=tot[counter][1]
                             tot[counter+1][0]=tot[counter][0]
-                            # tot[counter+1][2]=tot[counter][2]
                         else :
                             pass                
             if len(tot)!=0 :
@@ -317,7 +265,6 @@ def COMPUTE(project):
                     if year==0:
                         tot[counter][0]=project[counter][0]
                         tot[counter][0]=APFACTOR(tot[counter][0],project[counter][2],project[counter][4])
-                        #year=project[counter][4]-2
                     elif year==project[counter][4]-1:
                         CFAT=AFFACTOR(project[counter][1],project[counter][2],project[counter][4])
                         tot[counter][0]=tot[counter][0]-CFAT
@@ -326,7 +273,6 @@ def COMPUTE(project):
                         if CFAT>0:
                             CFAT=CFAT-TX
                         tot[counter][1]=tot[counter][1]+CFAT
-                    #elif year==project[counter][4]-2:          
             wait()
             cls()
             print("\t\t\t ______________________________________")
@@ -506,7 +452,7 @@ while True:
             print("\t\t\t|        MOHAMMAD JAVAD  ADEL          |")
             print("\t\t\t|     STUDENT NUMBER: 9621010042       |")
             print("\t\t\t|        ELECTRONIC ENGINIEER          |")
-            print("\t\t\t|        IN DATE : 2020/29/5           |")
+            print("\t\t\t|        IN DATE : 2020/07/17          |")
             print("\t\t\t|                                      |")
             print("\t\t\t|      1) BACK TO MAIN MENU            |")
             print("\t\t\t|      2) EXIT FROM APP                |")
